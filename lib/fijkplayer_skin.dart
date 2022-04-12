@@ -261,7 +261,7 @@ class _CustomFijkPanelState extends State<CustomFijkPanel>
       height: barHeight,
       alignment: Alignment.centerLeft,
       child: IconButton(
-        icon: Icon(Icons.arrow_back),
+        icon: Icon(Icons.chevron_left),
         padding: EdgeInsets.only(
           left: 10.0,
           right: 10.0,
