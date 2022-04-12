@@ -3,6 +3,8 @@ description: fijkplayer the skin
 version: 2.2.8
 homepage: https://github.com/abcd498936590/fijkplayer_skin
 
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
