@@ -55,7 +55,6 @@ class CustomFijkPanel extends StatefulWidget {
   final BuildContext? pageContent;
   final String playerTitle;
   final Function? onChangeVideo;
-  final Function? beforeChangeVideo;
   final int curTabIdx;
   final int curActiveIdx;
   final ShowConfigAbs showConfig;
@@ -69,7 +68,6 @@ class CustomFijkPanel extends StatefulWidget {
     this.playerTitle = "",
     required this.showConfig,
     this.onChangeVideo,
-    this.beforeChangeVideo,
     required this.videoFormat,
     required this.curTabIdx,
     required this.curActiveIdx,
@@ -192,16 +190,12 @@ class _CustomFijkPanelState extends State<CustomFijkPanel>
   Future<void> changeCurPlayVideo(int tabIdx, int activeIdx) async {
     // await player.stop();
     await player.reset().then((_) {
-      String curTabActiveUrl =
-          _videoSourceTabs.video![tabIdx]!.list![activeIdx]!.url!;
       // 回调
-      curTabActiveUrl = widget.beforeChangeVideo!(curTabActiveUrl);
+      String curTabActiveUrl = widget.onChangeVideo!(tabIdx, activeIdx);
       player.setDataSource(
         curTabActiveUrl,
         autoPlay: true,
       );
-      // 回调
-      widget.onChangeVideo!(tabIdx, activeIdx);
     });
   }
 
@@ -612,7 +606,6 @@ class _CustomFijkPanelState extends State<CustomFijkPanel>
             curActiveIdx: widget.curActiveIdx,
             curTabIdx: widget.curTabIdx,
             onChangeVideo: widget.onChangeVideo,
-            beforeChangeVideo: widget.beforeChangeVideo,
             player: widget.player,
             texturePos: widget.texturePos,
             showConfig: widget.showConfig,
@@ -652,7 +645,6 @@ class _buildGestureDetector extends StatefulWidget {
   final BuildContext? pageContent;
   final String playerTitle;
   final Function? onChangeVideo;
-  final Function? beforeChangeVideo;
   final int curTabIdx;
   final int curActiveIdx;
   final Function changeDrawerState;
@@ -668,7 +660,6 @@ class _buildGestureDetector extends StatefulWidget {
     this.playerTitle = "",
     required this.showConfig,
     this.onChangeVideo,
-    this.beforeChangeVideo,
     required this.curTabIdx,
     required this.curActiveIdx,
     required this.videoFormat,
@@ -828,7 +819,6 @@ class _buildGestureDetectorState extends State<_buildGestureDetector> {
     if (playend && !isOverFlow && showConfig.autoNext) {
       int newTabIdx = widget.curTabIdx;
       int newActiveIdx = widget.curActiveIdx + 1;
-      widget.onChangeVideo!(newTabIdx, newActiveIdx);
       // 切换播放源
       changeCurPlayVideo(newTabIdx, newActiveIdx);
     }
@@ -969,16 +959,12 @@ class _buildGestureDetectorState extends State<_buildGestureDetector> {
     });
     player.reset().then((_) {
       _speed = speed = 1.0;
-      String curTabActiveUrl =
-          _videoSourceTabs.video![tabIdx]!.list![activeIdx]!.url!;
       // 回调
-      curTabActiveUrl = widget.beforeChangeVideo!(curTabActiveUrl);
+      String curTabActiveUrl = widget.onChangeVideo!(tabIdx, activeIdx);
       player.setDataSource(
         curTabActiveUrl,
         autoPlay: true,
       );
-      // 回调
-      widget.onChangeVideo!(tabIdx, activeIdx);
     });
   }
 
