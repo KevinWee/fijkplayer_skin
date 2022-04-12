@@ -652,6 +652,7 @@ class _buildGestureDetector extends StatefulWidget {
   final BuildContext? pageContent;
   final String playerTitle;
   final Function? onChangeVideo;
+  final Function? beforeChangeVideo;
   final int curTabIdx;
   final int curActiveIdx;
   final Function changeDrawerState;
@@ -667,6 +668,7 @@ class _buildGestureDetector extends StatefulWidget {
     this.playerTitle = "",
     required this.showConfig,
     this.onChangeVideo,
+    this.beforeChangeVideo,
     required this.curTabIdx,
     required this.curActiveIdx,
     required this.videoFormat,
@@ -969,6 +971,8 @@ class _buildGestureDetectorState extends State<_buildGestureDetector> {
       _speed = speed = 1.0;
       String curTabActiveUrl =
           _videoSourceTabs.video![tabIdx]!.list![activeIdx]!.url!;
+      // 回调
+      curTabActiveUrl = widget.beforeChangeVideo!(curTabActiveUrl);
       player.setDataSource(
         curTabActiveUrl,
         autoPlay: true,
