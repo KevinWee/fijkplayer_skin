@@ -55,6 +55,7 @@ class CustomFijkPanel extends StatefulWidget {
   final BuildContext? pageContent;
   final String playerTitle;
   final Function? onChangeVideo;
+  final Function? beforeChangeVideo;
   final int curTabIdx;
   final int curActiveIdx;
   final ShowConfigAbs showConfig;
@@ -68,6 +69,7 @@ class CustomFijkPanel extends StatefulWidget {
     this.playerTitle = "",
     required this.showConfig,
     this.onChangeVideo,
+    this.beforeChangeVideo,
     required this.videoFormat,
     required this.curTabIdx,
     required this.curActiveIdx,
@@ -192,6 +194,8 @@ class _CustomFijkPanelState extends State<CustomFijkPanel>
     await player.reset().then((_) {
       String curTabActiveUrl =
           _videoSourceTabs.video![tabIdx]!.list![activeIdx]!.url!;
+      // 回调
+      curTabActiveUrl = widget.beforeChangeVideo!(curTabActiveUrl);
       player.setDataSource(
         curTabActiveUrl,
         autoPlay: true,
@@ -608,6 +612,7 @@ class _CustomFijkPanelState extends State<CustomFijkPanel>
             curActiveIdx: widget.curActiveIdx,
             curTabIdx: widget.curTabIdx,
             onChangeVideo: widget.onChangeVideo,
+            beforeChangeVideo: widget.beforeChangeVideo,
             player: widget.player,
             texturePos: widget.texturePos,
             showConfig: widget.showConfig,
