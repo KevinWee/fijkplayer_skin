@@ -1255,7 +1255,7 @@ class _buildGestureDetectorState extends State<_buildGestureDetector> {
   // 返回按钮
   Widget _buildTopBackBtn() {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: Icon(Icons.chevron_left),
       padding: EdgeInsets.only(
         left: 10.0,
         right: 10.0,
