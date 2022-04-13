@@ -189,9 +189,9 @@ class _CustomFijkPanelState extends State<CustomFijkPanel>
   // 切换播放源
   Future<void> changeCurPlayVideo(int tabIdx, int activeIdx) async {
     // await player.stop();
-    await player.reset().then((_) {
+    await player.reset().then((_) async {
       // 回调
-      String curTabActiveUrl = widget.onChangeVideo!(tabIdx, activeIdx);
+      String curTabActiveUrl = await widget.onChangeVideo!(tabIdx, activeIdx);
       player.setDataSource(
         curTabActiveUrl,
         autoPlay: true,
@@ -957,10 +957,10 @@ class _buildGestureDetectorState extends State<_buildGestureDetector> {
     setState(() {
       _buffering = false;
     });
-    player.reset().then((_) {
+    player.reset().then((_) async {
       _speed = speed = 1.0;
       // 回调
-      String curTabActiveUrl = widget.onChangeVideo!(tabIdx, activeIdx);
+      String curTabActiveUrl = await widget.onChangeVideo!(tabIdx, activeIdx);
       player.setDataSource(
         curTabActiveUrl,
         autoPlay: true,
