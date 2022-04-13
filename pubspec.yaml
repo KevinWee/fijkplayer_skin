@@ -1,6 +1,6 @@
 name: fijkplayer_skin
 description: fijkplayer the skin
-version: 2.2.8
+version: 2.2.9
 homepage: https://github.com/abcd498936590/fijkplayer_skin
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
